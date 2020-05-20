@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Hello, {{ name }}!</h1>
+    Your random number is {{ number }}.
+    <br>
+    {% if coin==1 %}
+        Your coin filp is HEADS.
+    {% else %}
+        Your coin filp is TAILS.
+    {% endif %}
+    <form action="/hello">
+        <input name="form_name" type="text">
+        <input type="submit">
+    </form>
+{% endblock %}

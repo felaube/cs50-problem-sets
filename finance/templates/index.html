@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+      <thead>
+        <tr>
+            <th scope="col">Buy</th>
+            <th scope="col">Sell</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Price</th>
+            <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td>
+                    <form class="form-inline" action="/buy" method="post">
+                        <div><input class="form-control form-control-sm" name="symbol" value={{ stock["symbol"] }} type="hidden"></div>
+                        <div><input class="form-control form-control-sm" name="shares" placeholder="Number of Shares" type="text"></div>
+                        </div><button class="btn btn-primary btn-sm" type="submit">Buy</button>
+                    </form>
+                </td>
+                <td>
+                    <form class="form-inline" action="/sell" method="post">
+                        <div><input class="form-control form-control-sm" name="symbol" value={{ stock["symbol"] }} type="hidden"></div>
+                        <div><input class="form-control form-control-sm" min=0 name="shares" placeholder="Number of Shares" type="number"></div>
+                        <button class="btn btn-primary btn-sm" type="submit">Sell</button>
+                    </form>
+                </td>
+                <td>{{ stock["symbol"] }}</td>
+                <td>{{ stock["name"] }}</td>
+                <td>{{ stock["shares"] }}</td>
+                <td>${{ stock["price"] }}</td>
+                <td>${{ stock["value"] }}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>${{ cash }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: bold">${{ patrimony }}</td>
+            </tr>
+      </tbody>
+    </table>
+{% endblock %}
